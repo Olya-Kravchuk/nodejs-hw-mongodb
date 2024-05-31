@@ -61,11 +61,17 @@ export const createContactController = async (req, res) => {
   //   message: 'Successfully created a contact!',
   //   data: сontact,
   // });
+  if (!req.body.name || !req.body.email) {
+    return res.status(400).json({
+      status: 400,
+      message: 'Name and email are required fields.',
+    });
+  }
   const contact = await createContact(req.body);
 
   res.status(201).json({
     status: 201,
-    message: `Successfully created a student!`,
+    message: `Successfully created a contact!`,
     data: contact,
   });
 };
@@ -113,6 +119,6 @@ export const patchContactController = async (req, res, next) => {
   res.json({
     status: 200,
     message: `Successfully patched a contact!`,
-    data: result.contact,
+    data: result,
   });
 };
