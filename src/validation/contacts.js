@@ -29,9 +29,11 @@ export const updateContactSchema = Joi.object({
     'string.empty': 'Name cannot be an empty field',
     'string.min': 'Name should have a minimum length of {#limit}',
     'string.max': 'Name should have a maximum length of {#limit}',
+    'any.required': 'Name is a required field',
   }),
   phoneNumber: Joi.number().messages({
     'number.base': 'Phone number should be a type of number',
+    'any.required': 'Phone number is a required field',
   }),
   email: Joi.string().email().messages({
     'string.email': 'Email must be a valid email',
