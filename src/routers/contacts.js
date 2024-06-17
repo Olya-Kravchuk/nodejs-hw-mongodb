@@ -15,34 +15,47 @@ import {
   updateContactSchema,
 } from '../validation/contacts.js';
 import { validateMongoId } from '../middlewares/validateMongoId.js';
+import { authenticate } from '../middlewares/authenticate.js';
+import { checkRoles } from '../middlewares/checkRoles.js';
+import { ROLES } from '../constants/index.js';
 
 const router = Router();
 
-router.get('/contacts', ctrlWrapper(getContactsController));
+router.use(authenticate);
+
+router.get('/', checkRoles(ROLES.PERSON), ctrlWrapper(getContactsController));
 
 router.get(
-  '/contacts/:contactId',
+  '/:contactId',
+  checkRoles(ROLES.PERSON),
   validateMongoId('contactId'),
   ctrlWrapper(getContactByIdController),
 );
 
 router.post(
-  '/contacts',
+  '/',
+  checkRoles(ROLES.PERSON),
   validateBody(createContactSchema),
   ctrlWrapper(createContactController),
 );
 
-router.delete('/contacts/:contactId', ctrlWrapper(deleteContactController));
+router.delete(
+  '/:contactId',
+  checkRoles(ROLES.PERSON),
+  ctrlWrapper(deleteContactController),
+);
 
 router.put(
-  '/contacts/:contactId',
+  '/:contactId',
+  checkRoles(ROLES.PERSON),
   validateBody(updateContactSchema),
   validateMongoId('contactId'),
   ctrlWrapper(upsertContactController),
 );
 
 router.patch(
-  '/contacts/:contactId',
+  '/:contactId',
+  checkRoles(ROLES.PERSON),
   validateBody(updateContactSchema),
   validateMongoId('contactId'),
   ctrlWrapper(patchContactController),
