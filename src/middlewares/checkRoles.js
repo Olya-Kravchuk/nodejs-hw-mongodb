@@ -1,6 +1,6 @@
 import createHttpError from 'http-errors';
-import { ROLES } from '../constants';
-import { Contact } from '../db/contact';
+import { ROLES } from '../constants/index.js';
+import { Contact } from '../db/contact.js';
 
 export const checkRoles =
   (...roles) =>
