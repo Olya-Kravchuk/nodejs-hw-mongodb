@@ -16,38 +16,38 @@ import {
 } from '../validation/contacts.js';
 import { validateMongoId } from '../middlewares/validateMongoId.js';
 import { authenticate } from '../middlewares/authenticate.js';
-import { checkRoles } from '../middlewares/checkRoles.js';
-import { ROLES } from '../constants/index.js';
+// import { checkRoles } from '../middlewares/checkRoles.js';
+// import { ROLES } from '../constants/index.js';
 
 const router = Router();
 
 router.use(authenticate);
 
-router.get('/', checkRoles(ROLES.PERSON), ctrlWrapper(getContactsController));
+router.get('/', ctrlWrapper(getContactsController));
 
 router.get(
   '/:contactId',
-  checkRoles(ROLES.PERSON),
+  // checkRoles(ROLES.PERSON),
   validateMongoId('contactId'),
   ctrlWrapper(getContactByIdController),
 );
 
 router.post(
   '/',
-  checkRoles(ROLES.PERSON),
+  // checkRoles(ROLES.PERSON),
   validateBody(createContactSchema),
   ctrlWrapper(createContactController),
 );
 
 router.delete(
   '/:contactId',
-  checkRoles(ROLES.PERSON),
+  // checkRoles(ROLES.PERSON),
   ctrlWrapper(deleteContactController),
 );
 
 router.put(
   '/:contactId',
-  checkRoles(ROLES.PERSON),
+  // checkRoles(ROLES.PERSON),
   validateBody(updateContactSchema),
   validateMongoId('contactId'),
   ctrlWrapper(upsertContactController),
@@ -55,7 +55,7 @@ router.put(
 
 router.patch(
   '/:contactId',
-  checkRoles(ROLES.PERSON),
+  // checkRoles(ROLES.PERSON),
   validateBody(updateContactSchema),
   validateMongoId('contactId'),
   ctrlWrapper(patchContactController),
