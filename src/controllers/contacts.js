@@ -62,22 +62,11 @@ export const createContactController = async (req, res) => {
   //     message: 'Name and phone number are required!',
   //   });
   // }
-  // const сontact = await createContact({
-  //   name,
-  //   phoneNumber,
-  //   email,
-  //   isFavourite,
-  //   contactType,
-  // });
-  // res.status(201).json({
-  //   status: 201,
-  //   message: 'Successfully created a contact!',
-  //   data: сontact,
-  // });
-  if (!req.body.name || !req.body.email) {
+
+  if (!req.body.name || !req.body.phoneNumber) {
     return res.status(400).json({
       status: 400,
-      message: 'Name and email are required fields.',
+      message: 'Name and phoneNumber are required fields.',
     });
   }
   const contact = await createContact(req.body);
