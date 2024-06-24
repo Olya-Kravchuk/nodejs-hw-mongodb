@@ -16,6 +16,7 @@ import {
 } from '../validation/contacts.js';
 import { validateMongoId } from '../middlewares/validateMongoId.js';
 import { authenticate } from '../middlewares/authenticate.js';
+import { upload } from '../middlewares/multer.js';
 // import { checkRoles } from '../middlewares/checkRoles.js';
 // import { ROLES } from '../constants/index.js';
 
@@ -36,6 +37,7 @@ router.post(
   '/',
   // checkRoles(ROLES.PERSON),
   validateBody(createContactSchema),
+  upload.single('photo'),
   ctrlWrapper(createContactController),
 );
 
@@ -50,6 +52,7 @@ router.put(
   // checkRoles(ROLES.PERSON),
   validateBody(updateContactSchema),
   validateMongoId('contactId'),
+  upload.single('photo'),
   ctrlWrapper(upsertContactController),
 );
 
@@ -58,6 +61,7 @@ router.patch(
   // checkRoles(ROLES.PERSON),
   validateBody(updateContactSchema),
   validateMongoId('contactId'),
+  upload.single('photo'),
   ctrlWrapper(patchContactController),
 );
 
