@@ -36,8 +36,8 @@ router.get(
 router.post(
   '/',
   // checkRoles(ROLES.PERSON),
-  validateBody(createContactSchema),
   upload.single('photo'),
+  validateBody(createContactSchema),
   ctrlWrapper(createContactController),
 );
 
@@ -50,18 +50,18 @@ router.delete(
 router.put(
   '/:contactId',
   // checkRoles(ROLES.PERSON),
+  upload.single('photo'),
   validateBody(updateContactSchema),
   validateMongoId('contactId'),
-  upload.single('photo'),
   ctrlWrapper(upsertContactController),
 );
 
 router.patch(
   '/:contactId',
   // checkRoles(ROLES.PERSON),
+  upload.single('photo'),
   validateBody(updateContactSchema),
   validateMongoId('contactId'),
-  upload.single('photo'),
   ctrlWrapper(patchContactController),
 );
 

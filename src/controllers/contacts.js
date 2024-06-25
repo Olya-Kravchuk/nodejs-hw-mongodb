@@ -63,7 +63,7 @@ export const getContactByIdController = async (req, res, next) => {
 export const createContactController = async (req, res) => {
   const personId = req.user._id;
   const photo = req.file;
-  let photoUrl;
+  let photoUrl = '';
 
   if (!req.body.name || !req.body.phoneNumber) {
     return res.status(400).json({
