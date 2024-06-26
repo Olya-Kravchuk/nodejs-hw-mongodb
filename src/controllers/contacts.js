@@ -110,7 +110,7 @@ export const upsertContactController = async (req, res, next) => {
   const { contactId } = req.params;
   const personId = req.user._id;
   const photo = req.file;
-  let photoUrl;
+  let photoUrl = '';
 
   if (photo) {
     if (env('ENABLE_CLOUDINARY') === 'true') {
@@ -142,12 +142,13 @@ export const upsertContactController = async (req, res, next) => {
     data: result.contact,
   });
 };
+
 export const patchContactController = async (req, res, next) => {
   const { contactId } = req.params;
   const personId = req.user._id;
   const photo = req.file;
 
-  let photoUrl;
+  let photoUrl = '';
 
   if (photo) {
     if (env('ENABLE_CLOUDINARY') === 'true') {
@@ -159,10 +160,10 @@ export const patchContactController = async (req, res, next) => {
 
   const updatePayload = {
     ...req.body,
-    photo: photoUrl,
+    photo: photoUrl || undefined,
   };
 
-  const result = await updateContact(contactId, personId, updatePayload);
+  const result = await updateContact(contactId, updatePayload, personId);
 
   if (!result) {
     next(createHttpError(404, 'Contact not found'));
