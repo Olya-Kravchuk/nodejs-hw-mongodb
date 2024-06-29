@@ -1,0 +1,58 @@
+tags:
+  - Auth
+summary: Log in a user
+operationId: loginUser
+description: 'Log in a user'
+security: []
+parameters:
+  - in: query
+    name: email
+    required: true
+    schema:
+      type: string
+      format: email
+    example: 'user@example.com'
+  - in: query
+    name: password
+    required: true
+    schema:
+      type: string
+    example: 'password123'
+responses:
+  '200':
+    description: 'User successfully logged in'
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            token:
+              type: string
+              example: 'jwt-token-12345'
+            user:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: '6671851ff5b9e10d96303cf7'
+                name:
+                  type: string
+                  example: 'John Doe'
+                email:
+                  type: string
+                  example: 'user@example.com'
+  '400':
+    description: 'Invalid credentials'
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 400
+            message:
+              type: string
+              example: 'Invalid credentials'
+  '401':
+    $ref: '../../components/responses/401.yaml'

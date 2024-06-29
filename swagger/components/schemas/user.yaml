@@ -1,0 +1,24 @@
+type: object
+required:
+  - name
+  - email
+  - password
+properties:
+    id:
+    type: string
+    example: '6671851ff5b9e10d96303cf7'
+  name:
+    type: string
+    minLength: 3
+    maxLength: 30
+    example: 'John Doe'
+  email:
+    type: string
+    format: email
+    example: 'jon.doe@example.com'
+  password:
+    type: string
+    example: 'wnfjhrd123bj'
+  token:
+    type: string
+    example: 'reset-token-123456'

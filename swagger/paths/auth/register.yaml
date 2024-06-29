@@ -1,0 +1,58 @@
+tags:
+  - Auth
+summary: Register a new user
+operationId: registerUser
+description: 'Register a new user'
+security: []
+parameters:
+  - in: query
+    name: name
+    required: true
+    schema:
+      type: string
+      minLength: 3
+      maxLength: 30
+    example: 'John Doe'
+  - in: query
+    name: email
+    required: true
+    schema:
+      type: string
+      format: email
+    example: 'jon.doe@example.com'
+  - in: query
+    name: password
+    required: true
+    schema:
+      type: string
+    example: 'wnfjhrd123bj'
+responses:
+  '201':
+    description: 'User successfully registered'
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            id:
+              type: string
+              example: '6671851ff5b9e10d96303cf7'
+            name:
+              type: string
+              example: 'John Doe'
+            email:
+              type: string
+              example: 'jon.doe@example.com'
+  '400':
+    description: 'Invalid input'
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 400
+            message:
+              type: string
+              example: 'Invalid input'
