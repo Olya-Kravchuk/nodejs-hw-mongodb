@@ -11,13 +11,13 @@ parameters:
     schema:
       type: string
       format: email
-    example: 'user@example.com'
+    example: 'jon.doe@example.com'
   - in: query
     name: password
     required: true
     schema:
       type: string
-    example: 'password123'
+    example: 'wnfjhrd123bj'
 responses:
   '200':
     description: 'User successfully logged in'
@@ -40,7 +40,7 @@ responses:
                   example: 'John Doe'
                 email:
                   type: string
-                  example: 'user@example.com'
+                  example: 'jon.doe@example.com'
   '400':
     description: 'Invalid credentials'
     content:

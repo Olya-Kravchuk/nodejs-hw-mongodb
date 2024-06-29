@@ -11,7 +11,7 @@ parameters:
     schema:
       type: string
       format: email
-    example: 'user@example.com'
+    example: 'jon.doe@example.com'
 responses:
   '200':
     description: 'Password reset email sent'
